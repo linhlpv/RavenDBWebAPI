@@ -12,6 +12,6 @@ namespace RavenDBWebAPI.RModel
         public Employee employee { get; set; }
         public SupportCall support { get; set; }
         public long Miniseconds { get; set; }
-        
+        public long Sum { get; set; }
     }
 }

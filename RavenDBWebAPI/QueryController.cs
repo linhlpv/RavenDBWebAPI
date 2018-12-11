@@ -25,7 +25,40 @@ namespace RavenDBWebAPI
             return queryRepository.GetFromTable();
         }
 
-        //[Route("GetFrom2Table")]
-
+        [Route("GetFrom2Table"), HttpGet]
+        public RObject GetForm2Table()
+        {
+            return queryRepository.GetFroM2Tables();
+        }
+        [Route("GetFrom3Table"), HttpGet]
+        public RObject GetForm3Table()
+        {
+            return queryRepository.GetFrom3Tables();
+        }
+        [Route("Count"), HttpGet]
+        public RObject Count()
+        {
+            return queryRepository.Count();
+        }
+        [Route("Update"), HttpGet]
+        public RObject Update()
+        {
+            return queryRepository.Update();
+        }
+        [Route("Delete"), HttpGet]
+        public RObject Delete()
+        {
+            return queryRepository.Delete();
+        }
+        [Route("Patching"), HttpGet]
+        public RObject Pathching()
+        {
+            return queryRepository.Patching();
+        }
+        [Route("DeleteByQuery"), HttpGet]
+        public RObject DeleteByQuery()
+        {
+            return queryRepository.DeleteByQuery();
+        }
     }
 }

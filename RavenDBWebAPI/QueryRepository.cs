@@ -29,8 +29,10 @@ namespace RavenDBWebAPI
         }
        
 
-        public void GetFrom3Tables()
+        public RObject GetFrom3Tables()
         {
+            RObject rObject = new RObject();
+
             using (var session = store.OpenSession())
             {
                 var sp = Stopwatch.StartNew();
@@ -41,12 +43,17 @@ namespace RavenDBWebAPI
                 Customer customer = session.Load<Customer>(supportCall.CustomerId);
                 Employee employee = session.Load<Employee>(supportCall.EmployeeId);
                 sp.Stop();
-                Console.WriteLine(sp.ElapsedMilliseconds);
+                rObject.customer = customer;
+                rObject.employee = employee;
+                rObject.support = supportCall;
+                rObject.Miniseconds = sp.ElapsedMilliseconds; 
             }
+            return rObject;
         }
 
-        public void GetFroM2Tables()
+        public RObject GetFroM2Tables()
         {
+            RObject rObject = new RObject();
             using (var session = store.OpenSession())
             {
                 var sp = Stopwatch.StartNew();
@@ -55,8 +62,11 @@ namespace RavenDBWebAPI
                     .Where(s => s.Cost == 37445).FirstOrDefault();
                 Customer customer = session.Load<Customer>(supportCall.CustomerId);
                 sp.Stop();
-                Console.WriteLine(sp.ElapsedMilliseconds);
+                rObject.customer = customer;
+                rObject.support = supportCall;
+                rObject.Miniseconds = sp.ElapsedMilliseconds; 
             }
+            return rObject;
         }
 
         public RObject GetFromTable()
@@ -74,8 +84,9 @@ namespace RavenDBWebAPI
             return rObject;
         }
 
-        public void Update()
+        public RObject Update()
         {
+            RObject rObject = new RObject();
             using (var session = store.OpenSession())
             {
                 var sp = Stopwatch.StartNew();
@@ -83,12 +94,14 @@ namespace RavenDBWebAPI
                 customer.Name = "Linq";
                 session.SaveChanges();
                 sp.Stop();
-                Console.WriteLine(sp.ElapsedMilliseconds);
+                rObject.Miniseconds = sp.ElapsedMilliseconds; 
             }
+            return rObject;
         }
 
-        public void Delete()
+        public RObject Delete()
         {
+            RObject rObject = new RObject();
             using (var session = store.OpenSession())
             {
                 var sp = Stopwatch.StartNew();
@@ -96,36 +109,42 @@ namespace RavenDBWebAPI
                 session.Delete(customer);
                 session.SaveChanges();
                 sp.Stop();
-                Console.WriteLine(sp.ElapsedMilliseconds);
+                rObject.Miniseconds = sp.ElapsedMilliseconds;
             }
+            return rObject;
         }
 
-        public void Patching()
+        public RObject Patching()
         {
+            RObject rObject = new RObject();
             using (var session = store.OpenSession())
             {
                 var sp = Stopwatch.StartNew();
                 session.Advanced.Patch<Customer, string>("100", c => c.Name, "Linq");
                 session.SaveChanges();
                 sp.Stop();
-                Console.WriteLine(sp.ElapsedMilliseconds);
+                rObject.Miniseconds = sp.ElapsedMilliseconds;
             }
+            return rObject;
         }
 
-        public void DeleteByQuery()
+        public RObject DeleteByQuery()
         {
+            RObject rObject = new RObject();
             using (var session = store.OpenSession())
             {
                 var sp = Stopwatch.StartNew();
                 var operation = store.Operations.Send(new DeleteByQueryOperation<SupportCall, SupportCallByCost>(x => x.Cost < 100));
                 session.SaveChanges();
                 sp.Stop();
-                Console.WriteLine(sp.ElapsedMilliseconds);
+                rObject.Miniseconds = sp.ElapsedMilliseconds;
             }
+            return rObject;
         }
 
-        public void Count()
+        public RObject Count()
         {
+            RObject rObject = new RObject();
             var sp = Stopwatch.StartNew();
             using (var session = store.OpenSession())
             {
@@ -133,9 +152,10 @@ namespace RavenDBWebAPI
                 sp.Start();
                 var numPosts = session.Query<Customer>().Count();
                 sp.Stop();
-                Console.WriteLine(sp.ElapsedMilliseconds);
-                Console.WriteLine(numPosts);
+                rObject.Sum = numPosts;
+                rObject.Miniseconds = sp.ElapsedMilliseconds;
             }
+            return rObject;
         }
     }
 }

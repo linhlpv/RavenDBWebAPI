@@ -6,14 +6,14 @@ namespace RavenDBWebAPI
 {
     public interface IQueryRepository
     {
-        void GetFrom3Tables();
-        void GetFroM2Tables();
+        RObject GetFrom3Tables();
+        RObject GetFroM2Tables();
         RObject GetFromTable();
-        void Update();
-        void Delete();
-        void Patching();
-        void DeleteByQuery();
-        void Count();
+        RObject Update();
+        RObject Delete();
+        RObject Patching();
+        RObject DeleteByQuery();
+        RObject Count();
 
 
     }
