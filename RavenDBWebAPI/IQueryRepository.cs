@@ -1,5 +1,6 @@
 ﻿using Raven.Client.Documents;
 using RavenDBWebAPI.Model;
+using RavenDBWebAPI.RModel;
 
 namespace RavenDBWebAPI
 {
@@ -7,7 +8,7 @@ namespace RavenDBWebAPI
     {
         void GetFrom3Tables();
         void GetFroM2Tables();
-        Customer GetFromTable();
+        RObject GetFromTable();
         void Update();
         void Delete();
         void Patching();

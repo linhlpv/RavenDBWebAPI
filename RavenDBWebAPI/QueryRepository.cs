@@ -1,6 +1,7 @@
 ﻿using Raven.Client.Documents;
 using Raven.Client.Documents.Operations;
 using RavenDBWebAPI.Model;
+using RavenDBWebAPI.RModel;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -58,18 +59,19 @@ namespace RavenDBWebAPI
             }
         }
 
-        public Customer GetFromTable()
+        public RObject GetFromTable()
         {
 
             Customer customer;
+            RObject rObject = new RObject();
             using (var session = store.OpenSession())
             {
                 var sp = Stopwatch.StartNew();
                 customer = session.Load<Customer>("1070");
                 sp.Stop();
-                Console.WriteLine(sp.ElapsedMilliseconds);
+                rObject.Miniseconds = sp.ElapsedMilliseconds;
             }
-            return customer;
+            return rObject;
         }
 
         public void Update()
