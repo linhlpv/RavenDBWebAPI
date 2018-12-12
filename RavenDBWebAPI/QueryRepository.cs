@@ -46,7 +46,8 @@ namespace RavenDBWebAPI
                 rObject.customer = customer;
                 rObject.employee = employee;
                 rObject.support = supportCall;
-                rObject.Miniseconds = sp.ElapsedMilliseconds; 
+                rObject.Miniseconds = sp.ElapsedMilliseconds;
+                rObject.Action = true;
             }
             return rObject;
         }
@@ -64,7 +65,8 @@ namespace RavenDBWebAPI
                 sp.Stop();
                 rObject.customer = customer;
                 rObject.support = supportCall;
-                rObject.Miniseconds = sp.ElapsedMilliseconds; 
+                rObject.Miniseconds = sp.ElapsedMilliseconds;
+                rObject.Action = true;
             }
             return rObject;
         }
@@ -80,6 +82,7 @@ namespace RavenDBWebAPI
                 customer = session.Load<Customer>("1070");
                 sp.Stop();
                 rObject.Miniseconds = sp.ElapsedMilliseconds;
+                rObject.Action = true;
             }
             return rObject;
         }
@@ -94,7 +97,8 @@ namespace RavenDBWebAPI
                 customer.Name = "Linq";
                 session.SaveChanges();
                 sp.Stop();
-                rObject.Miniseconds = sp.ElapsedMilliseconds; 
+                rObject.Miniseconds = sp.ElapsedMilliseconds;
+                rObject.Action = true;
             }
             return rObject;
         }
@@ -110,6 +114,7 @@ namespace RavenDBWebAPI
                 session.SaveChanges();
                 sp.Stop();
                 rObject.Miniseconds = sp.ElapsedMilliseconds;
+                rObject.Action = true;
             }
             return rObject;
         }
@@ -124,6 +129,7 @@ namespace RavenDBWebAPI
                 session.SaveChanges();
                 sp.Stop();
                 rObject.Miniseconds = sp.ElapsedMilliseconds;
+                rObject.Action = true;
             }
             return rObject;
         }
@@ -136,8 +142,10 @@ namespace RavenDBWebAPI
                 var sp = Stopwatch.StartNew();
                 var operation = store.Operations.Send(new DeleteByQueryOperation<SupportCall, SupportCallByCost>(x => x.Cost < 100));
                 session.SaveChanges();
+
                 sp.Stop();
                 rObject.Miniseconds = sp.ElapsedMilliseconds;
+                rObject.Action = true;
             }
             return rObject;
         }
@@ -154,6 +162,7 @@ namespace RavenDBWebAPI
                 sp.Stop();
                 rObject.Sum = numPosts;
                 rObject.Miniseconds = sp.ElapsedMilliseconds;
+                rObject.Action = true;
             }
             return rObject;
         }
