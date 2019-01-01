@@ -19,10 +19,10 @@ namespace RavenDBWebAPI
             this.queryRepository = queryRepository;
         }
 
-        [HttpGet("GetFromTable")]
-        public RObject  GetFormTable([FromBody] QueryObject q)
+        [HttpGet("{Id}")]
+        public RObject  GetFormTable([FromRoute] string Id)
         {
-            return queryRepository.GetFromTable(q.Id);
+            return queryRepository.GetFromTable(Id);
         }
 
         [HttpGet("GetFrom2Table")]
@@ -30,10 +30,10 @@ namespace RavenDBWebAPI
         {
             return queryRepository.GetFroM2Tables();
         }
-        [HttpGet("GetFrom3Table")]
-        public RObject GetForm3Table([FromBody] QueryObject q)
+        [HttpGet("{Cost}")]
+        public RObject GetForm3Table([FromRoute] int Cost)
         {
-            return queryRepository.GetFrom3Tables(q.cost);
+            return queryRepository.GetFrom3Tables(Cost);
         }
         [HttpGet("Count")]
         public RObject Count()
