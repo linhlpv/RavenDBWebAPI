@@ -81,6 +81,7 @@ namespace RavenDBWebAPI
                 var sp = Stopwatch.StartNew();
                 customer = session.Load<Customer>(customerId);
                 sp.Stop();
+                rObject.customer = customer;
                 rObject.Milliseconds = sp.ElapsedMilliseconds;
                 rObject.Action = true;
             }

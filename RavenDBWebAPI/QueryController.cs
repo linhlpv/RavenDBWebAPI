@@ -19,7 +19,7 @@ namespace RavenDBWebAPI
             this.queryRepository = queryRepository;
         }
 
-        [HttpGet("{Id}")]
+        [HttpGet("GetById/{Id}")]
         public RObject  GetFormTable([FromRoute] string Id)
         {
             return queryRepository.GetFromTable(Id);
