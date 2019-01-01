@@ -161,7 +161,7 @@ namespace RavenDBWebAPI
                 sp.Start();
                 var numPosts = session.Query<Customer>().Count();
                 sp.Stop();
-                rObject.Sum = numPosts;
+                rObject.Sum = numPosts.ToString();
                 rObject.Milliseconds = sp.ElapsedMilliseconds;
                 rObject.Action = true;
             }
