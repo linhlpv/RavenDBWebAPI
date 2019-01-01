@@ -19,46 +19,46 @@ namespace RavenDBWebAPI
             this.queryRepository = queryRepository;
         }
 
-        [Route("GetFromTable"), HttpGet]
-        public RObject  GetFormTable()
+        [HttpGet("GetFromTable")]
+        public RObject  GetFormTable([FromRoute] string customerId)
         {
-            return queryRepository.GetFromTable();
+            return queryRepository.GetFromTable(customerId);
         }
 
-        [Route("GetFrom2Table"), HttpGet]
+        [HttpGet("GetFrom2Table")]
         public RObject GetForm2Table()
         {
             return queryRepository.GetFroM2Tables();
         }
-        [Route("GetFrom3Table"), HttpGet]
-        public RObject GetForm3Table()
+        [HttpGet("GetFrom3Table")]
+        public RObject GetForm3Table([FromBody] QueryObject q)
         {
-            return queryRepository.GetFrom3Tables();
+            return queryRepository.GetFrom3Tables(q.cost);
         }
-        [Route("Count"), HttpGet]
+        [HttpGet("Count")]
         public RObject Count()
         {
             return queryRepository.Count();
         }
-        [Route("Update"), HttpGet]
-        public RObject Update()
+        [HttpPut("{customerId}")]
+        public RObject Update([FromRoute] string customerId)
         {
-            return queryRepository.Update();
+            return queryRepository.Update(customerId);
         }
-        [Route("Delete"), HttpGet]
-        public RObject Delete()
+        [HttpDelete("{customerId}")]
+        public RObject Delete([FromRoute] string customerId)
         {
-            return queryRepository.Delete();
+            return queryRepository.Delete(customerId);
         }
-        [Route("Patching"), HttpGet]
+        [HttpPut("Patching")]
         public RObject Pathching()
         {
             return queryRepository.Patching();
         }
-        [Route("DeleteByQuery"), HttpGet]
-        public RObject DeleteByQuery()
+        [HttpDelete("DeleteByQuery")]
+        public RObject DeleteByQuery([FromBody] QueryObject q)
         {
-            return queryRepository.DeleteByQuery();
+            return queryRepository.DeleteByQuery(q.cost);
         }
     }
 }

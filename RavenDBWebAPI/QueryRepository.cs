@@ -29,7 +29,7 @@ namespace RavenDBWebAPI
         }
        
 
-        public RObject GetFrom3Tables()
+        public RObject GetFrom3Tables(int cost)
         {
             RObject rObject = new RObject();
 
@@ -39,7 +39,7 @@ namespace RavenDBWebAPI
                 SupportCall supportCall = session.Query<SupportCall, SupportCallByCost>()
                     .Include<SupportCall>(s => s.CustomerId)
                     .Include<SupportCall>(s => s.EmployeeId)
-                    .Where(s => s.Cost == 37445).FirstOrDefault();
+                    .Where(s => s.Cost == cost).FirstOrDefault();
                 Customer customer = session.Load<Customer>(supportCall.CustomerId);
                 Employee employee = session.Load<Employee>(supportCall.EmployeeId);
                 sp.Stop();
@@ -71,7 +71,7 @@ namespace RavenDBWebAPI
             return rObject;
         }
 
-        public RObject GetFromTable()
+        public RObject GetFromTable(string customerId)
         {
 
             Customer customer;
@@ -79,7 +79,7 @@ namespace RavenDBWebAPI
             using (var session = store.OpenSession())
             {
                 var sp = Stopwatch.StartNew();
-                customer = session.Load<Customer>("1070");
+                customer = session.Load<Customer>(customerId);
                 sp.Stop();
                 rObject.Miniseconds = sp.ElapsedMilliseconds;
                 rObject.Action = true;
@@ -87,13 +87,13 @@ namespace RavenDBWebAPI
             return rObject;
         }
 
-        public RObject Update()
+        public RObject Update(string customerId)
         {
             RObject rObject = new RObject();
             using (var session = store.OpenSession())
             {
                 var sp = Stopwatch.StartNew();
-                Customer customer = session.Load<Customer>("1050");
+                Customer customer = session.Load<Customer>(customerId);
                 customer.Name = "Linq";
                 session.SaveChanges();
                 sp.Stop();
@@ -103,13 +103,13 @@ namespace RavenDBWebAPI
             return rObject;
         }
 
-        public RObject Delete()
+        public RObject Delete(string customerId)
         {
             RObject rObject = new RObject();
             using (var session = store.OpenSession())
             {
                 var sp = Stopwatch.StartNew();
-                Customer customer = session.Load<Customer>("10003");
+                Customer customer = session.Load<Customer>(customerId);
                 session.Delete(customer);
                 session.SaveChanges();
                 sp.Stop();
@@ -134,13 +134,13 @@ namespace RavenDBWebAPI
             return rObject;
         }
 
-        public RObject DeleteByQuery()
+        public RObject DeleteByQuery(int cost)
         {
             RObject rObject = new RObject();
             using (var session = store.OpenSession())
             {
                 var sp = Stopwatch.StartNew();
-                var operation = store.Operations.Send(new DeleteByQueryOperation<SupportCall, SupportCallByCost>(x => x.Cost < 100));
+                var operation = store.Operations.Send(new DeleteByQueryOperation<SupportCall, SupportCallByCost>(x => x.Cost < cost));
                 session.SaveChanges();
 
                 sp.Stop();

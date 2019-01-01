@@ -13,5 +13,6 @@ namespace RavenDBWebAPI.RModel
         public SupportCall support { get; set; }
         public long Miniseconds { get; set; }
         public long Sum { get; set; }
+        public bool Action { get; set; }
     }
 }
