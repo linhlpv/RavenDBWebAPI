@@ -20,9 +20,9 @@ namespace RavenDBWebAPI
         }
 
         [HttpGet("GetFromTable")]
-        public RObject  GetFormTable([FromRoute] string customerId)
+        public RObject  GetFormTable([FromBody] QueryObject q)
         {
-            return queryRepository.GetFromTable(customerId);
+            return queryRepository.GetFromTable(q.Id);
         }
 
         [HttpGet("GetFrom2Table")]

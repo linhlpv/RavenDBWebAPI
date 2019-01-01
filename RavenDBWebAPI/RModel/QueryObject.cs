@@ -8,5 +8,6 @@ namespace RavenDBWebAPI.RModel
     public class QueryObject
     {
         public int cost { get; set; }
+        public string Id { get; set; }
     }
 }

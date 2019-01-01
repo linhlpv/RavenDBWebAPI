@@ -46,7 +46,7 @@ namespace RavenDBWebAPI
                 rObject.customer = customer;
                 rObject.employee = employee;
                 rObject.support = supportCall;
-                rObject.Miniseconds = sp.ElapsedMilliseconds;
+                rObject.Milliseconds = sp.ElapsedMilliseconds;
                 rObject.Action = true;
             }
             return rObject;
@@ -65,7 +65,7 @@ namespace RavenDBWebAPI
                 sp.Stop();
                 rObject.customer = customer;
                 rObject.support = supportCall;
-                rObject.Miniseconds = sp.ElapsedMilliseconds;
+                rObject.Milliseconds = sp.ElapsedMilliseconds;
                 rObject.Action = true;
             }
             return rObject;
@@ -81,7 +81,7 @@ namespace RavenDBWebAPI
                 var sp = Stopwatch.StartNew();
                 customer = session.Load<Customer>(customerId);
                 sp.Stop();
-                rObject.Miniseconds = sp.ElapsedMilliseconds;
+                rObject.Milliseconds = sp.ElapsedMilliseconds;
                 rObject.Action = true;
             }
             return rObject;
@@ -97,7 +97,7 @@ namespace RavenDBWebAPI
                 customer.Name = "Linq";
                 session.SaveChanges();
                 sp.Stop();
-                rObject.Miniseconds = sp.ElapsedMilliseconds;
+                rObject.Milliseconds = sp.ElapsedMilliseconds;
                 rObject.Action = true;
             }
             return rObject;
@@ -113,7 +113,7 @@ namespace RavenDBWebAPI
                 session.Delete(customer);
                 session.SaveChanges();
                 sp.Stop();
-                rObject.Miniseconds = sp.ElapsedMilliseconds;
+                rObject.Milliseconds = sp.ElapsedMilliseconds;
                 rObject.Action = true;
             }
             return rObject;
@@ -128,7 +128,7 @@ namespace RavenDBWebAPI
                 session.Advanced.Patch<Customer, string>("100", c => c.Name, "Linq");
                 session.SaveChanges();
                 sp.Stop();
-                rObject.Miniseconds = sp.ElapsedMilliseconds;
+                rObject.Milliseconds = sp.ElapsedMilliseconds;
                 rObject.Action = true;
             }
             return rObject;
@@ -144,7 +144,7 @@ namespace RavenDBWebAPI
                 session.SaveChanges();
 
                 sp.Stop();
-                rObject.Miniseconds = sp.ElapsedMilliseconds;
+                rObject.Milliseconds = sp.ElapsedMilliseconds;
                 rObject.Action = true;
             }
             return rObject;
@@ -161,7 +161,7 @@ namespace RavenDBWebAPI
                 var numPosts = session.Query<Customer>().Count();
                 sp.Stop();
                 rObject.Sum = numPosts;
-                rObject.Miniseconds = sp.ElapsedMilliseconds;
+                rObject.Milliseconds = sp.ElapsedMilliseconds;
                 rObject.Action = true;
             }
             return rObject;
